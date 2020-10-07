@@ -1,8 +1,8 @@
 {
 	"private": true,
 	"scripts": {
-		"watch": "nodemon index.js",
-		"start": "node index.js"
+		"watch": "nodemon server.js",
+		"start": "node server.js"
 	},
 	"devDependencies": {
 		"nodemon": "^2.0.4"
