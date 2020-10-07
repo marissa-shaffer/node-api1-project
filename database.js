@@ -1,7 +1,7 @@
 let users = [
-	{ id: "1", name: "Jane Doe" },
-	{ id: "2", name: "John Doe" },
-	{ id: "3", name: "Jack Doe" },
+	{ id: "1", name: "Jane Doe", bio: "Not Tarzan's Wife, another Jane"},
+	{ id: "2", name: "John Doe", bio: "Doesn't know Jack Doe" },
+	{ id: "3", name: "Jack Doe", bio: "A Jack of all trades but a master of none" },
 ]
 
 function getUsers() {
