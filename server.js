@@ -39,21 +39,19 @@ server.get("/users", (req, res) => {
 server.get("/users/:id", (req, res) => {
   const id = req.params.id
   const user = db.getUserById(id)
-  .then((user) => {
-    if (user) {
-      res.json(user)
-    } else {
-      res.status(404).json({
-        message: "The user with the specified ID does not exist.",
-      })
-    }
-  })
-  .catch((error) => {
-    console.log(error)
-    res.status(500).json({
-      errorMessage: "The user information could not be retrieved.",
+  
+  if (!id) {
+    return res.status(404).json({
+      message: "The user with the specified ID does not exist."
     })
-  })
+  }
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(500).json({
+      errorMessage: "The users information could not be retrieved."
+    })
+  }
 })
 
 server.delete("/users/:id", (req, res) => {
