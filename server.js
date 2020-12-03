@@ -62,6 +62,54 @@ server.post("/users", (req, res) => {
 	res.json(newUser)
 })
 
+server.put("/users/:id", (req, res) => {
+    const user = db.getUserById(req.params.id)
+
+	if (!req.body.name || !req.body.bio) {
+        return res.status(400).json({
+          errorMessage: "Please provide name and bio for the user.",
+        })
+      }
+    
+      db.updateUser(req.params.id, req.body)
+        .then((user) => {
+          if (user) {
+            res.status(200).json(user);
+          } else {
+            res.status(404).json({
+              errorMessage: "The user with the specified ID does not exist.",
+            })
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+          res.status(500).json({
+            errorMessage: "The user information could not be modified.",
+          })
+        })
+})
+
+server.delete("/users/:id", (req, res) => {
+    const id = req.params.id
+    const user = db.getUserById(id)
+    then((user) => {
+        if (user) {
+          db.deleteUser(id)
+          res.json(user).end()
+        } else {
+          res.status(404).json({
+            message: "The user with the specified ID does not exist.",
+          })
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+        res.status(500).json({
+          errorMessage: "The user could not be removed" ,
+        })
+      })
+})
+
 server.listen(8080, () => {
 	console.log("server started")
 })
